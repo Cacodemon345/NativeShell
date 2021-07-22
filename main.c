@@ -51,6 +51,7 @@ WCHAR *helpstr[] =
     L"exit     - Exit shell               sysinfo  - Dump system information\n"
     L"lm       - List modules             vid      - Test screen output\n"
     L"lp       - List processes           move X Y - Move file X to Y\n"
+    L"ver      - Display Windows version\n"
     L"\n"
     L"If a command is not in the list, it is treated as an executable name\n"
     L"\n"
@@ -316,6 +317,17 @@ RtlClipProcessMessage(PCHAR Command)
       } else
       {
         RtlCliDisplayString("Not enough arguments.\n");
+      }
+    }
+    else if (!_strnicmp(Command, "ver", 3))
+    {
+      RTL_OSVERSIONINFOW ver;
+
+      memset(&ver, 0, sizeof(RTL_OSVERSIONINFOW));
+      ver.dwOSVersionInfoSize = sizeof(RTL_OSVERSIONINFOW);
+      if (NT_SUCCESS(RtlGetVersion(&ver)))
+      {
+        RtlCliDisplayString("\nWindows version: %d.%d.%d\n", ver.dwMajorVersion, ver.dwMinorVersion, ver.dwBuildNumber);
       }
     }
     else

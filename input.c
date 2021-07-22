@@ -289,6 +289,14 @@ RtlCliGetLine(IN HANDLE hDriver)
                 // Now we have to call in the display subsystem to redisplay the
                 // current text buffer. (NOT the current line input buffer!)
                 //
+                // caco345: This needs to be done two times to make the
+                // character disappear properly on Windows 8+ as '\r' does not
+                // actually erase the entire line and only puts the position at
+                // the start of the line on it and later.
+                //
+                RtlClipBackspace();
+                RtlCliPutChar(' ');
+                RtlCliPutChar('\r');
                 RtlClipBackspace();
 
                 //
