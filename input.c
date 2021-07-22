@@ -2,6 +2,7 @@
 
 Copyright (c) Alex Ionescu.  All rights reserved.
 Copyright (c) 2011 amdf.
+Copyright (c) 2021 Cacodemon345.
 
     THIS CODE AND INFORMATION IS PROVIDED UNDER THE LESSER GNU PUBLIC LICENSE.
     PLEASE READ THE FILE "COPYING" IN THE TOP LEVEL DIRECTORY.
@@ -25,6 +26,7 @@ Revision History:
     Alex Ionescu - Started Implementation - 01-Mar-06
     Alex Ionescu - Reworked architecture - 23-Mar-06
     amdf - Added correct scancode translation in RtlCliGetChar - 20-Feb-11
+    Cacodemon345 - Fix backspace behaviour on Windows 8 and later - 23-Jul-21
 
 --*/
 #include "precomp.h"

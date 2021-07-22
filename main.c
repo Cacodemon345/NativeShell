@@ -2,6 +2,7 @@
 
 Copyright (c) Alex Ionescu.  All rights reserved.
 Copyright (c) 2011 amdf.
+Copyright (c) 2021 Cacodemon345.
 
     THIS CODE AND INFORMATION IS PROVIDED UNDER THE LESSER GNU PUBLIC LICENSE.
     PLEASE READ THE FILE "COPYING" IN THE TOP LEVEL DIRECTORY.
@@ -26,6 +27,7 @@ Revision History:
     Alex Ionescu - Reworked architecture - 23-Mar-06
     amdf         - Added process launch command - 25-Jan-11
     amdf         - Added move command - 20-Feb-11
+    Cacodemon345 - Added ver command - 23-Jul-21
 
 --*/
 #include "precomp.h"
