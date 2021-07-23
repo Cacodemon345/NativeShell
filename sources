@@ -19,9 +19,3 @@ SOURCES=display.c  \
     ntreg.c
 
 PRECOMPILED_INCLUDE=precomp.h
-
-TARGETLIBS= \
-$(DDK_LIB_PATH)\ntdll.lib \
-$(DDK_LIB_PATH)\nt.lib
-
-USE_NTDLL=1
