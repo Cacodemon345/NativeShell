@@ -1,7 +1,25 @@
 # Native Shell Improved
 This is a fork of Native Shell with corrected backspace behaviour and the ability to display Windows version information.
 
-# Building
-WinDDK and NTNDK (https://code.google.com/p/native-nt-toolkit/) is required. Only tested with Windows 7 DDK.
+## Requirements
+Windows Driver Kit Version 7.1.0
 
-From a WinDDK developer command line shell, run `b.cmd`.
+## Build
+
+Build command for WDK x86 Free Build Environment:
+
+`build /g /w`
+
+Build output is native.exe.
+
+# Install
+
+Copy native.exe to %systemroot%\system32\
+
+Use add.reg from `install` directory.
+
+# Uninstall
+Use remove.reg from `install` directory.
+
+Delete %systemroot%\system32\native.exe
+
