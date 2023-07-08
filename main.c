@@ -195,6 +195,43 @@ RtlClipProcessMessage(PCHAR Command)
     {
       RtlCliPowerOff();
     }
+    else if (!_strnicmp(Command, "doomstart", 8))
+    {
+#define DOOMGENERIC_TYPE 40002
+
+#define IOCTL_DOOMGENERIC_INIT_DOOM \
+	CTL_CODE( DOOMGENERIC_TYPE, 0x850, METHOD_NEITHER, FILE_ANY_ACCESS )
+	
+#define IOCTL_DOOMGENERIC_WAIT_DOOM \
+	CTL_CODE( DOOMGENERIC_TYPE, 0x851, METHOD_NEITHER, FILE_ANY_ACCESS )
+      NTSTATUS Status;
+      HANDLE DeviceHandle;
+      UNICODE_STRING str;
+      OBJECT_ATTRIBUTES attr;
+      IO_STATUS_BLOCK Iosb;
+
+      NtClose(hKeyboard);
+      RtlInitUnicodeString(&str, L"\\Device\\DoomGeneric");
+      InitializeObjectAttributes(&attr, &str, OBJ_CASE_INSENSITIVE, NULL, NULL);
+
+      Status = NtCreateFile(&DeviceHandle, FILE_GENERIC_READ | FILE_GENERIC_WRITE | SYNCHRONIZE, &attr, &Iosb, NULL, FILE_ATTRIBUTE_NORMAL, 0, FILE_OPEN, FILE_SYNCHRONOUS_IO_NONALERT, NULL, 0);
+
+      if (!NT_SUCCESS(Status)) {
+        RtlCliOpenInputDevice(hKeyboard, KeyboardType);
+        return;
+      }
+
+      Status = NtDeviceIoControlFile(DeviceHandle, NULL, NULL, NULL, &Iosb, IOCTL_DOOMGENERIC_INIT_DOOM, NULL, 0, NULL, 0);
+
+      if (NT_SUCCESS(Status)) {
+        LARGE_INTEGER time;
+        time.QuadPart = -(10000);
+        while (1) {
+          NtDelayExecution(FALSE, &time);
+        }
+      }
+      RtlCliOpenInputDevice(hKeyboard, KeyboardType);
+    }
     else if (!_strnicmp(Command, "vid", 6))
     {
       UINT j;
